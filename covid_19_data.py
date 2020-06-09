@@ -72,7 +72,8 @@ class csv_from_url:
     def total_cases(self):
         self.result = self.merged.iloc[:, [0, 2, 5]]
         self.result_sort = self.result.sort_values(by = 'total_cases_x', ascending = False)    
-        return self.result_sort.rename(columns={'total_cases_x':'Today Cases', 'total_cases_y':'Previous Day Cases'})
+        self.result_sort['difference'] = self.result_sort['total_cases_x'] - self.result_sort['total_cases_y']        
+        return self.result_sort.rename(columns={'total_cases_x':'Today Cases', 'total_cases_y':'Previous Day Cases'})        
     
     def bar_display(self):
         bar_width = 0.4
